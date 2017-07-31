@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GurruPCL.CustomViews.GurruDropdownField">
+    <ContentView.Content>
+        <StackLayout>
+            <StackLayout x:Name="Border" BackgroundColor="#cdcdcd" Padding="1" HorizontalOptions="FillAndExpand">
+                <Label x:Name="ValueLabel" TextColor="#666666" HorizontalOptions="StartAndExpand" BackgroundColor="#ebe9e9"/>
+                <Image Source="down.png"/>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+            <StackLayout x:Name="ErrorFiled" BackgroundColor="#fbeed5" HorizontalOptions="Start" IsVisible="True" Orientation="Horizontal">
+                <Image Source="error.png" Margin="5"/>
+                <Label x:Name="ErrorLabel" TextColor="#996c20"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

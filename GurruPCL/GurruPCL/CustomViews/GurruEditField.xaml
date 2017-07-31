@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GurruPCL.CustomViews.GurruEditField">
+    <ContentView.Content>
+        <StackLayout>
+            <StackLayout x:Name="Border" BackgroundColor="#cdcdcd" Padding="1" HorizontalOptions="FillAndExpand">
+                <Entry x:Name="EditText" TextColor="#333333" HorizontalOptions="EndAndExpand" BackgroundColor="#ebe9e9" TextChanged="Entry_TextChanged"/>
+            </StackLayout>
+            <StackLayout x:Name="ErrorFiled" BackgroundColor="#fbeed5" HorizontalOptions="Start" IsVisible="True" Orientation="Horizontal">
+                <Image Source="error.png" Margin="5"/>
+                <Label x:Name="ErrorLabel" TextColor="#996c20"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

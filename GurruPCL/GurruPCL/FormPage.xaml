@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:GurruPCL.CustomViews;assembly=GurruPCL" 
+             x:Class="GurruPCL.FormPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+
+                <StackLayout x:Name="Container" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                    <StackLayout BackgroundColor="#ebe9e9" HeightRequest="60" HorizontalOptions="EndAndExpand" VerticalOptions="Start" Orientation="Horizontal">
+                        <Image Source="edit.png" Opacity="0.5" Margin="10, 0"/>
+                        <Label Text="Quick create new" FontSize="Large" FontAttributes="Bold" TextColor="#666666" VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <custom:GurruEditField x:Name="OrganizationName"/>
+
+                </StackLayout>
+
+                <ActivityIndicator x:Name="Loader" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+
+            </AbsoluteLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

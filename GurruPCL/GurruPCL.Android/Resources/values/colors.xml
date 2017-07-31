@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <color name="startBlueColor">#22b1d5</color>
+  <color name="endBlueColor">#058caf</color>
+  <color name="mainBlueColor">#5199b7</color>
+  <color name="darkBlueColor">#006278</color>
+  <color name="headerBlueColor">#3a87a7</color>
+  
+  <color name="lightGrayColor">#ebe9e9</color>
+  <color name="darkerGrayColor">#cdcdcd</color>
+
+  <color name="blackColor">#151515</color>
+  
+  <color name="textGrayColor">#666666</color>
+  <color name="textDarkerGrayColor">#333333</color>
+
+  <color name="textYellowColor">#996c20</color>
+  <color name="backgroundYellowColor">#fbeed5</color>
+  
+  <color name="red">#fbeed5</color>
+</resources>

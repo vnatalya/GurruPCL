@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GurruPCL"
+             xmlns:custom="clr-namespace:GurruPCL.CustomViews;assembly=GurruPCL" 
+             x:Class="GurruPCL.MainPage">
+
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+
+        <Image x:Name="BackgroundImage" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Source="backgr.jpg" Aspect="AspectFill"/>
+
+        <StackLayout x:Name="Container" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Start" HeightRequest="50"  BackgroundColor="#3a87a7" Margin="0" Padding="0">
+                <Image Source="login_header.png" Margin="10, 0, 0, 5" HorizontalOptions="StartAndExpand"/>
+                <Label x:Name="LogoutButton" TextColor="White" Text="Logout" HorizontalOptions="End" VerticalOptions="Center" FontSize="Medium" Margin="0, 0, 10, 0">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="LogoutButton_Tapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+            <custom:GurruButton x:Name="AddLeadButton" Clicked="AddLeadButton_Clicked" Text="Add Lead" Margin="50, 150, 50, 0"/>
+
+            <custom:GurruButton x:Name="FromVCardButton" Clicked="FromVCardButton_Clicked" Text="From VCard"  Margin="50, 50, 50, 0"/>
+
+        </StackLayout>
+        
+        <ActivityIndicator x:Name="Loader" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+
+    </AbsoluteLayout>
+
+</ContentPage>
