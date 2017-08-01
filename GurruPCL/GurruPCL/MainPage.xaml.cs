@@ -86,10 +86,10 @@ namespace GurruPCL
 
         void SetLoader(bool show)
         {
-            Loader.IsRunning = show;
-            Loader.IsVisible = show;
-            AddLeadButton.IsEnabled = !show;
-            FromVCardButton.IsEnabled = !show;
+   //         Loader.IsRunning = show;
+			//Loader.IsVisible = show;
+			//AddLeadButton.IsEnabled = !show;
+			//FromVCardButton.IsEnabled = !show;
         }
 
         public static class Media

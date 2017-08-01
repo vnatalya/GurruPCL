@@ -98,6 +98,22 @@
     <ITunesArtwork Include="iTunesArtwork@2x" />
     <None Include="packages.config" />
     <BundleResource Include="Resources\tessdata\eng.traineddata" />
+    <BundleResource Include="Resources\user.png" />
+    <BundleResource Include="Resources\Header.png" />
+    <BundleResource Include="Resources\icon.png" />
+    <BundleResource Include="Resources\left_arrow.png" />
+    <BundleResource Include="Resources\lock.png" />
+    <BundleResource Include="Resources\login_header.png" />
+    <BundleResource Include="Resources\logo_black.png" />
+    <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\gurru.png" />
+    <BundleResource Include="Resources\back.png" />
+    <BundleResource Include="Resources\backgr.jpg" />
+    <BundleResource Include="Resources\background.jpg" />
+    <BundleResource Include="Resources\edit.png" />
+    <BundleResource Include="Resources\error.png" />
+    <Compile Include="CustomViews\GurruButtonRenderer.cs" />
+    <Compile Include="ColorHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -185,9 +201,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GurruPCL\GurruPCL.csproj">
-      <Project>{7d8539f7-705c-49e1-b7dd-729de1f464af}</Project>
+      <Project>{85E3D7F4-B551-4F41-BAA4-FBFEC2618DA8}</Project>
       <Name>GurruPCL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomViews\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.224\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

@@ -22,6 +22,9 @@ namespace GurruPCL.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+			App.DeviceWidth = (float)UIScreen.MainScreen.Bounds.Width;
+			App.DeviceHeight = (float)UIScreen.MainScreen.Bounds.Height;
+
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
