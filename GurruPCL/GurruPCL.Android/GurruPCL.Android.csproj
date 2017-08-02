@@ -155,6 +155,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CusomViews\GurruButtonRenderer.cs" />
+    <Compile Include="CusomViews\GurruEntryRenderer.cs" />
+    <Compile Include="CusomViews\RoundDarkerFrameRenderer.cs" />
+    <Compile Include="CusomViews\RoundDarkFrameRenderer.cs" />
+    <Compile Include="CusomViews\RoundLightFrameRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -231,12 +235,23 @@
     <AndroidResource Include="Resources\drawable\logo_black.png" />
     <AndroidResource Include="Resources\drawable\login_header.png" />
     <AndroidResource Include="Resources\drawable\backgr.jpg" />
-    <AndroidResource Include="Resources\drawable\user.png" />
     <AndroidResource Include="Resources\drawable\edit.png" />
     <AndroidResource Include="Resources\drawable\error.png" />
-    <AndroidResource Include="Resources\drawable\lock.png" />
     <AndroidResource Include="Resources\drawable\back.png" />
     <AndroidResource Include="Resources\drawable\down.png" />
+    <AndroidResource Include="Resources\drawable\gurru_white.png" />
+    <AndroidResource Include="Resources\drawable\check.png" />
+    <AndroidResource Include="Resources\drawable\close.png" />
+    <AndroidResource Include="Resources\drawable\search.png" />
+    <AndroidResource Include="Resources\drawable\RoundFrameLightDrawable.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\RoundDarkFrameDrawable.xml" />
+    <AndroidResource Include="Resources\drawable\RoundFrameDarkerDrawable.xml" />
+    <AndroidResource Include="Resources\drawable\user.png" />
+    <AndroidResource Include="Resources\drawable\lock.png" />
+    <AndroidResource Include="Resources\drawable\checked.png" />
+    <AndroidResource Include="Resources\drawable\unchecked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

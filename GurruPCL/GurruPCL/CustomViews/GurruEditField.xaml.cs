@@ -20,7 +20,9 @@ namespace GurruPCL.CustomViews
             set { EditText.Text = value; }
         }
         
-        public string LabelText { set { ErrorLabel.Text = value; } }
+        public string ErrorText { set { ErrorLabel.Text = value; } }
+        
+        public bool Mandatory { get; set; }
 
         private bool missing;
         public bool Missing
@@ -28,11 +30,16 @@ namespace GurruPCL.CustomViews
             get { return missing; }
             set
             {
+                if (!Mandatory)
+                    return;
+
                 missing = value;
                 Border.BackgroundColor = missing ? Color.FromHex("#ef3f3f") : Color.FromHex("#cdcdcd");
                 ErrorFiled.IsVisible = missing;
             }
         }
+
+        public Keyboard EntryKeyboard { set { EditText.Keyboard = value; } }
 
         public GurruEditField()
         {
@@ -41,10 +48,10 @@ namespace GurruPCL.CustomViews
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            missing = string.IsNullOrEmpty(e.NewTextValue);
+            Missing = string.IsNullOrEmpty(e.NewTextValue);
 
             if (!string.IsNullOrEmpty(e.NewTextValue) && e.NewTextValue.Length > MaxChar)
-                (sender as Entry).Text = e.OldTextValue ?? string.Empty;
+                (sender as Editor).Text = e.OldTextValue ?? string.Empty;
         }
     }
 }

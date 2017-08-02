@@ -1,10 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:GurruPCL.CustomViews;assembly=GurruPCL" 
              x:Class="GurruPCL.LoginPage">
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
-        </StackLayout>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Image x:Name="BackgroundImage" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Source="backgr.jpg" Aspect="AspectFill"/>
+
+            <StackLayout x:Name="Container" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+                <custom:RoundLightFrame HorizontalOptions="Center" VerticalOptions="Center" Padding="2" Margin="0,100,0,0" Spacing="0">
+
+                    <custom:RoundDarkFrame BackgroundColor="#ebe9e9" Padding="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+
+                        <custom:RoundLightFrame BackgroundColor="#ffffffff" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                            <Image Source="logo_black.png" HorizontalOptions="Center" Margin="12" Scale="0.8"/>
+
+                            <custom:RoundLightFrame Margin="24, 0, 24, 0" Padding="2" Spacing="0">
+                                <custom:RoundDarkerFrame Padding="1" BackgroundColor="#cdcdcd" Orientation="Horizontal">
+                                    <Image Source="user.png" Scale="0.8"/>
+                                    <Entry x:Name="UsernameEntry" Placeholder="Username" WidthRequest="250" PlaceholderColor="#666666" TextColor="#666666" TextChanged="Entry_TextChanged" HorizontalOptions="StartAndExpand"  BackgroundColor="#ebe9e9" Margin="0"/>
+                                </custom:RoundDarkerFrame>
+                            </custom:RoundLightFrame>
+
+                            <custom:RoundLightFrame Margin="24, 24, 24, 0" Padding="2" Spacing="0">
+                                <custom:RoundDarkerFrame Padding="1" BackgroundColor="#cdcdcd" Orientation="Horizontal">
+                                    <Image Source="lock.png" Scale="0.8"/>
+                                    <Entry x:Name="PasswordEntry" IsPassword="True" Placeholder="Password" WidthRequest="250" PlaceholderColor="#666666" TextColor="#666666" TextChanged="Entry_TextChanged" HorizontalOptions="StartAndExpand"  BackgroundColor="#ebe9e9" Margin="0"/>
+                                </custom:RoundDarkerFrame>
+                            </custom:RoundLightFrame>
+
+                            <custom:GurruButton x:Name="LoginButton" Text="LOGIN" Margin="24, 24, 24, 0" Clicked="LoginButton_Clicked"/>
+
+                            <StackLayout Orientation="Horizontal" Margin="24, 16, 24, 32">
+                                <Image x:Name="RememberImage" Source="unchecked" Scale="0.8"/>
+                                <Label Text="Remember me" TextColor="#666666" VerticalOptions="Center"/>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            
+                        </custom:RoundLightFrame>
+
+                    </custom:RoundDarkFrame>
+
+                </custom:RoundLightFrame>
+                
+            </StackLayout>
+
+            <ActivityIndicator x:Name="Loader" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsVisible="false" IsRunning="false"/>
+
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

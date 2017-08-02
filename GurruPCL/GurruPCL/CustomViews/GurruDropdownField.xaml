@@ -3,18 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GurruPCL.CustomViews.GurruDropdownField">
     <ContentView.Content>
-        <StackLayout>
-            <StackLayout x:Name="Border" BackgroundColor="#cdcdcd" Padding="1" HorizontalOptions="FillAndExpand">
-                <Label x:Name="ValueLabel" TextColor="#666666" HorizontalOptions="StartAndExpand" BackgroundColor="#ebe9e9"/>
-                <Image Source="down.png"/>
+
+        <StackLayout Padding="0" Margin="0" Spacing="0">
+            
+            <StackLayout x:Name="Border" BackgroundColor="#cdcdcd" Padding="1" HorizontalOptions="FillAndExpand" Margin="0" Orientation="Horizontal" Spacing="0">
+                <Label x:Name="ValueLabel" TextColor="#666666" HorizontalOptions="FillAndExpand" BackgroundColor="#ebe9e9"/>
+                <BoxView VerticalOptions="StartAndExpand" WidthRequest="1" BackgroundColor="#cdcdcd"/>
+                <Image Source="down.png" BackgroundColor="White"/>
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </StackLayout.GestureRecognizers>
             </StackLayout>
-            <StackLayout x:Name="ErrorFiled" BackgroundColor="#fbeed5" HorizontalOptions="Start" IsVisible="True" Orientation="Horizontal">
-                <Image Source="error.png" Margin="5"/>
-                <Label x:Name="ErrorLabel" TextColor="#996c20"/>
+            
+            <StackLayout x:Name="ErrorFiled" BackgroundColor="#fbeed5" HorizontalOptions="Start" IsVisible="False" Orientation="Horizontal" Padding="0" Margin="0">
+                <Image Source="error.png" Scale="0.5"/>
+                <Label x:Name="ErrorLabel" TextColor="#996c20" FontSize="Small" VerticalOptions="Center" Margin="0,0,16,0"/>
             </StackLayout>
+            
         </StackLayout>
+        
     </ContentView.Content>
 </ContentView>

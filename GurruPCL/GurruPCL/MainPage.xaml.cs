@@ -86,10 +86,10 @@ namespace GurruPCL
 
         void SetLoader(bool show)
         {
-   //         Loader.IsRunning = show;
-			//Loader.IsVisible = show;
-			//AddLeadButton.IsEnabled = !show;
-			//FromVCardButton.IsEnabled = !show;
+            Loader.IsRunning = show;
+            Loader.IsVisible = show;
+            AddLeadButton.IsEnabled = !show;
+            FromVCardButton.IsEnabled = !show;
         }
 
         public static class Media
@@ -112,8 +112,7 @@ namespace GurruPCL
         }
 
         private async void LogoutButton_Tapped(object sender, EventArgs e)
-        {
-            
+        {            
             await Navigation.PushAsync(new LoginPage());
             Navigation.RemovePage(this);
         }

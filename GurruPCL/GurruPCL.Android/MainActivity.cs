@@ -39,7 +39,8 @@ namespace GurruPCL.Droid
 
             App.TesseractApi = new TesseractApi(Application, AssetsDeployment.OncePerVersion);
 
-            Resolver.SetResolver(App.Container.GetResolver());            
+            if (!Resolver.IsSet)
+                Resolver.SetResolver(App.Container.GetResolver());            
         }
     }
 }

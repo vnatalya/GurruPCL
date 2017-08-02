@@ -2,23 +2,152 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:custom="clr-namespace:GurruPCL.CustomViews;assembly=GurruPCL" 
+              BackgroundColor = "#3a87a7"
              x:Class="GurruPCL.FormPage">
+    
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.iOS>0, 20, 0, 0</OnPlatform.iOS>
+        </OnPlatform>
+    </ContentPage.Padding>
+    
     <ContentPage.Content>
         <ScrollView>
-            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
+                
+                <StackLayout x:Name="Container" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
 
-                <StackLayout x:Name="Container" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-
-                    <StackLayout BackgroundColor="#ebe9e9" HeightRequest="60" HorizontalOptions="EndAndExpand" VerticalOptions="Start" Orientation="Horizontal">
-                        <Image Source="edit.png" Opacity="0.5" Margin="10, 0"/>
+                    <!--Bar-->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Start" HeightRequest="50"  BackgroundColor="#3a87a7" Padding="0">
+                        <Image x:Name="BackButton" Source="back.png" Margin="10,0,0,0">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="BackButton_Clicked"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Image Source="gurru_white.png" Margin="10, 0, 0, 5" HorizontalOptions="StartAndExpand" Scale="0.8"/>
+                        <Label x:Name="LogoutButton" TextColor="White" Text="Logout" HorizontalOptions="End" VerticalOptions="Center" FontSize="Medium" Margin="0, 0, 10, 0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="LogoutButton_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                    
+                    <!--Header-->
+                    <StackLayout BackgroundColor="#ebe9e9" HeightRequest="60" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Orientation="Horizontal">
+                        <Image Source="edit.png" Opacity="0.5" Margin="10, 0" Scale="0.5"/>
                         <Label Text="Quick create new" FontSize="Large" FontAttributes="Bold" TextColor="#666666" VerticalOptions="Center"/>
                     </StackLayout>
 
-                    <custom:GurruEditField x:Name="OrganizationName"/>
+                    <!--Organization-->
+                    <StackLayout  BackgroundColor="#ebe9e9" Padding="1" HorizontalOptions="FillAndExpand" Margin="10">
+                        <StackLayout BackgroundColor="White">
+                            <Label Text="ORGANIZATION" TextColor="#151515" FontSize="Large" Margin="16, 8, 0, 0"/>
 
+                            <!--Name-->
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Organazation Name" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                                <Label Text="*" TextColor="#ff0f0f" Margin="0, 10, 0, 0"/>
+                            </StackLayout>                            
+                            <custom:GurruEditField x:Name="OrganizationName" Margin="16,0,16,0" HorizontalOptions="FillAndExpand"/>
+
+                            <!--ParentOrganization-->
+                            <Label Text="Parent Organization" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                            <custom:GurruDropdownField x:Name="ParentOrganization" Margin="16,0,16,0" HorizontalOptions="FillAndExpand"/>
+
+                            <!--BusinessType-->
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="BusinessType" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                                <Label Text="*" TextColor="#ff0f0f" Margin="0, 10, 0, 0"/>
+                            </StackLayout>
+                            <custom:GurruDropdownField x:Name="BusinessType" Margin="16,0,16,0" HorizontalOptions="FillAndExpand"/>
+
+                            <!--BusinessPhone-->
+                            <Label Text="Business Phone" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                            <custom:GurruEditField x:Name="BusinessPhone" Margin="16,0,16,0" HorizontalOptions="FillAndExpand"/>
+
+                            <!--Email-->
+                            <Label Text="Email" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                            <custom:GurruEditField x:Name="Email" Margin="16,0,16,10" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>                        
+                    </StackLayout>
+
+                    <!--Contact-->
+                    <StackLayout BackgroundColor="#ebe9e9" Padding="1" HorizontalOptions="FillAndExpand" Margin="10">
+                        <StackLayout BackgroundColor="White">
+                            <Label Text="CONTACT" TextColor="#151515" FontSize="Large" Margin="16, 8, 0, 0"/>
+
+                            <!--FirstName-->
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="First Name" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                                <Label Text="*" TextColor="#ff0f0f" Margin="0, 10, 0, 0"/>
+                            </StackLayout>
+                            <custom:GurruEditField x:Name="FirstName" Margin="16,0,16,0" HorizontalOptions="FillAndExpand"/>
+
+                            <!--LastName-->
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Last Name" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                                <Label Text="*" TextColor="#ff0f0f" Margin="0, 10, 0, 0"/>
+                            </StackLayout>
+                            <custom:GurruEditField x:Name="LastName" Margin="16,0,16,0" HorizontalOptions="FillAndExpand"/>
+
+                            <!--ContactPhone-->
+                            <Label Text="Contact Phone" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                            <custom:GurruEditField x:Name="ContactPhone" Margin="16,0,16,10" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <!--Details-->
+                    <StackLayout  BackgroundColor="#ebe9e9" Padding="1" HorizontalOptions="FillAndExpand" Margin="10">
+                        <StackLayout BackgroundColor="White">
+                            <Label Text="DETAILS" TextColor="#151515" FontSize="Large" Margin="16, 8, 0, 0"/>
+
+                            <!--SalesPerson-->
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Sales Person" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                                <Label Text="*" TextColor="#ff0f0f" Margin="0, 10, 0, 0"/>
+                            </StackLayout>
+                            <custom:GurruDropdownField x:Name="SalesPerson" Margin="16,0,16,0" HorizontalOptions="FillAndExpand"/>
+
+                            <!--SalesActivity-->
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Sales Activity" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                                <Label Text="*" TextColor="#ff0f0f" Margin="0, 10, 0, 0"/>
+                            </StackLayout>
+                            <custom:GurruDropdownField x:Name="SalesActivity" Margin="16,0,16,0" HorizontalOptions="FillAndExpand"/>
+
+                            <!--Source-->
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Source" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                                <Label Text="*" TextColor="#ff0f0f" Margin="0, 10, 0, 0"/>
+                            </StackLayout>
+                            <custom:GurruDropdownField x:Name="Source" Margin="16,0,16,10" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+
+
+                    <!--DetailsOfOpportunity-->
+                    <StackLayout  BackgroundColor="#ebe9e9" Padding="1" HorizontalOptions="FillAndExpand" Margin="10">
+                        <StackLayout BackgroundColor="White">
+                            <Label Text="DETAIL OF OPPROTUNITY" TextColor="#151515" FontSize="Large" Margin="16, 8, 0, 0"/>
+
+                            <Label Text="Details Of Opportunity" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+
+                            <StackLayout BackgroundColor="#cdcdcd" Padding="2" HorizontalOptions="FillAndExpand" Margin="10">
+                                <Editor x:Name="DetailsOfOpportunity" TextColor="#666666" HorizontalOptions="FillAndExpand" BackgroundColor="#ebe9e9" TextChanged="DetailsOfOpportunity_TextChanged"/>
+                            </StackLayout>
+
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <custom:GurruButton x:Name="CreateButton" Image="check.png" Text="Create" Clicked="FooterButton_Clicked" Scale="0.8" HorizontalOptions="Start"/>
+                        <custom:GurruButton x:Name="QualifyButton" Image="check.png" Text="Create And Qualify" Clicked="FooterButton_Clicked" Scale="0.8" HorizontalOptions="Center"/>
+                        <custom:GurruButton x:Name="CancelButton" Image="close.png" Text="Close" Clicked="FooterButton_Clicked" BackgroundColor="Red" Scale="0.8" HorizontalOptions="End"/>
+                    </StackLayout>
+                    
                 </StackLayout>
 
-                <ActivityIndicator x:Name="Loader" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+              <ActivityIndicator x:Name="Loader" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsRunning="False" IsVisible="False"/>
 
             </AbsoluteLayout>
         </ScrollView>

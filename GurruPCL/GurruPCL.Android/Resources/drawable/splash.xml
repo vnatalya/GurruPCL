@@ -7,7 +7,7 @@
   <item>
     <bitmap
       android:scaleType="centerCrop"
-      android:src="@drawable/background"/>
+      android:src="@drawable/backgr"/>
   </item>
   
   <item>
