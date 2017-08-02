@@ -39,8 +39,21 @@ namespace GurruPCL
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MainPage());
-            Navigation.RemovePage(this);
+			PasswordErrorFiled.IsVisible = string.IsNullOrEmpty(PasswordEntry.Text);
+			UsernameErrorField.IsVisible = string.IsNullOrEmpty(UsernameEntry.Text);
+
+			if (string.IsNullOrEmpty(UsernameEntry.Text) || string.IsNullOrEmpty(PasswordEntry.Text))
+				return;
+
+			//var res = await ViewModel.LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
+
+			//if (res.Status != System.Net.HttpStatusCode.OK)
+			//	await DisplayAlert(res.Title, res.Message, "Ok");
+			//else
+			//{
+	            await Navigation.PushAsync(new MainPage());
+	            Navigation.RemovePage(this);
+			//}
         }
     }
 }

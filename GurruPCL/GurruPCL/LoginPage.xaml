@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:custom="clr-namespace:GurruPCL.CustomViews;assembly=GurruPCL" 
@@ -9,34 +9,42 @@
 
             <Image x:Name="BackgroundImage" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Source="backgr.jpg" Aspect="AspectFill"/>
 
-            <StackLayout x:Name="Container" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout x:Name="Container" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0">
 
-                <custom:RoundLightFrame HorizontalOptions="Center" VerticalOptions="Center" Padding="2" Margin="0,100,0,0" Spacing="0">
+                <custom:RoundLightFrame HorizontalOptions="Center" VerticalOptions="Center" Padding="2" Margin="16,100,16,50" Spacing="0" Opacity="0.75">
 
-                    <custom:RoundDarkFrame BackgroundColor="#ebe9e9" Padding="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                    <custom:RoundDarkFrame BackgroundColor="#ebe9e9" Padding="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" Opacity="1">
 
-                        <custom:RoundLightFrame BackgroundColor="#ffffffff" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <custom:RoundLightFrame BackgroundColor="#ffffffff" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
 
                             <Image Source="logo_black.png" HorizontalOptions="Center" Margin="12" Scale="0.8"/>
 
                             <custom:RoundLightFrame Margin="24, 0, 24, 0" Padding="2" Spacing="0">
-                                <custom:RoundDarkerFrame Padding="1" BackgroundColor="#cdcdcd" Orientation="Horizontal">
+                                <custom:RoundDarkerFrame Padding="1" BackgroundColor="#cdcdcd" Orientation="Horizontal" Spacing="0">
                                     <Image Source="user.png" Scale="0.8"/>
-                                    <Entry x:Name="UsernameEntry" Placeholder="Username" WidthRequest="250" PlaceholderColor="#666666" TextColor="#666666" TextChanged="Entry_TextChanged" HorizontalOptions="StartAndExpand"  BackgroundColor="#ebe9e9" Margin="0"/>
+                                    <Entry x:Name="UsernameEntry" Placeholder="Username" PlaceholderColor="#666666" TextColor="#666666" TextChanged="Entry_TextChanged" HorizontalOptions="FillAndExpand"  BackgroundColor="#ebe9e9" Margin="0"/>
                                 </custom:RoundDarkerFrame>
                             </custom:RoundLightFrame>
-
+                            <StackLayout x:Name="UsernameErrorField" BackgroundColor="#fbeed5" HorizontalOptions="Start" Orientation="Horizontal" Padding="0" Margin="24,0" IsVisible="False">
+				                <Image Source="error.png" Scale="0.5"/>
+				                <Label x:Name="UsernameErrorLabel" Text="Username cannot be empty" TextColor="#996c20" FontSize="Small" VerticalOptions="Center" Margin="0,0,16,0"/>
+            				</StackLayout>
+							
                             <custom:RoundLightFrame Margin="24, 24, 24, 0" Padding="2" Spacing="0">
-                                <custom:RoundDarkerFrame Padding="1" BackgroundColor="#cdcdcd" Orientation="Horizontal">
+                                <custom:RoundDarkerFrame Padding="1" BackgroundColor="#cdcdcd" Orientation="Horizontal" Spacing="0">
                                     <Image Source="lock.png" Scale="0.8"/>
-                                    <Entry x:Name="PasswordEntry" IsPassword="True" Placeholder="Password" WidthRequest="250" PlaceholderColor="#666666" TextColor="#666666" TextChanged="Entry_TextChanged" HorizontalOptions="StartAndExpand"  BackgroundColor="#ebe9e9" Margin="0"/>
+                                    <Entry x:Name="PasswordEntry" IsPassword="True" Placeholder="Password" PlaceholderColor="#666666" TextColor="#666666" TextChanged="Entry_TextChanged" HorizontalOptions="FillAndExpand"  BackgroundColor="#ebe9e9" Margin="0"/>
                                 </custom:RoundDarkerFrame>
                             </custom:RoundLightFrame>
-
+                            <StackLayout x:Name="PasswordErrorFiled" BackgroundColor="#fbeed5" HorizontalOptions="Start" Orientation="Horizontal" Padding="0" Margin="24, 0" IsVisible="False">
+				                <Image Source="error.png" Scale="0.5"/>
+				                <Label x:Name="PasswordErrorLabel" Text="Password cannot be empty" TextColor="#996c20" FontSize="Small" VerticalOptions="Center" Margin="0,0,16,0"/>
+				            </StackLayout>
+							
                             <custom:GurruButton x:Name="LoginButton" Text="LOGIN" Margin="24, 24, 24, 0" Clicked="LoginButton_Clicked"/>
 
                             <StackLayout Orientation="Horizontal" Margin="24, 16, 24, 32">
-                                <Image x:Name="RememberImage" Source="unchecked" Scale="0.8"/>
+                                <Image x:Name="RememberImage" Source="checked" Scale="0.8" Opacity="0.5"/>
                                 <Label Text="Remember me" TextColor="#666666" VerticalOptions="Center"/>
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>

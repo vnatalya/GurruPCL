@@ -26,6 +26,8 @@
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignProvision>b0f63ab3-ff9a-492f-b513-3c7b56ce6671</CodesignProvision>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -112,8 +114,18 @@
     <BundleResource Include="Resources\background.jpg" />
     <BundleResource Include="Resources\edit.png" />
     <BundleResource Include="Resources\error.png" />
-    <Compile Include="CustomViews\GurruButtonRenderer.cs" />
     <Compile Include="ColorHelper.cs" />
+    <Compile Include="CustomViews\GurruButtonRenderer.cs" />
+    <BundleResource Include="Resources\check.png" />
+    <BundleResource Include="Resources\checked.png" />
+    <BundleResource Include="Resources\close.png" />
+    <BundleResource Include="Resources\down.png" />
+    <BundleResource Include="Resources\gurru_white.png" />
+    <BundleResource Include="Resources\search.png" />
+    <BundleResource Include="Resources\unchecked.png" />
+    <Compile Include="CustomViews\RoundFrameRenderer.cs" />
+    <Compile Include="CustomViews\RoundDarkFrameRernderer.cs" />
+    <Compile Include="CustomViews\RoundDarkerFrameRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -197,6 +209,12 @@
     <Reference Include="XLabs.Serialization, Version=2.0.5782.15703, Culture=neutral, PublicKeyToken=d65109b36e5040e4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\XLabs.Serialization.2.0.5782\lib\Xamarin.iOS10\XLabs.Serialization.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Connectivity.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.3.0.2\lib\Xamarin.iOS10\Plugin.Connectivity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.3.0.2\lib\Xamarin.iOS10\Plugin.Connectivity.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

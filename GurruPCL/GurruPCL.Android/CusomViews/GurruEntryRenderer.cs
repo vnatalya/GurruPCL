@@ -3,9 +3,9 @@ using Xamarin.Forms.Platform.Android;
 
 namespace GurruPCL.Droid.CusomViews
 {
-    public class GurruEntryRenderer : EditorRenderer
+	public class GurruEntryRenderer : EntryRenderer
     {
-        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Editor> e)
+		protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Entry> e)
         {
             base.OnElementChanged(e);
 
@@ -16,7 +16,8 @@ namespace GurruPCL.Droid.CusomViews
                 Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
                 Control.Background = null;
                 Control.SetSingleLine(true);
-            }
+				Control.PaintFlags = Android.Graphics.PaintFlags.UnderlineText; 
+			}
         }
     }
 }

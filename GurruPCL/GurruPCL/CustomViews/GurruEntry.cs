@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace GurruPCL.CustomViews
 {
-    public class GurruEntry : Editor
+    public class GurruEntry : Entry
     {
         protected override void OnParentSet()
         {

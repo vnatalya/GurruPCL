@@ -24,6 +24,7 @@
     <JavaOptions />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <AndroidTlsProvider></AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -152,6 +153,12 @@
       <HintPath>..\..\packages\XLabs.Serialization.2.0.5782\lib\portable-net45+netcore45+wp8+MonoAndroid1+MonoTouch1\XLabs.Serialization.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Plugin.Connectivity.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.3.0.2\lib\MonoAndroid10\Plugin.Connectivity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.3.0.2\lib\MonoAndroid10\Plugin.Connectivity.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CusomViews\GurruButtonRenderer.cs" />
@@ -189,7 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GurruPCL\GurruPCL.csproj">
-      <Project>{7d8539f7-705c-49e1-b7dd-729de1f464af}</Project>
+      <Project>{85E3D7F4-B551-4F41-BAA4-FBFEC2618DA8}</Project>
       <Name>GurruPCL</Name>
     </ProjectReference>
   </ItemGroup>
