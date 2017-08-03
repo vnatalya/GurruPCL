@@ -77,7 +77,7 @@ namespace GurruPCL
                 return result;
             }
 
-            HttpResponseMessage response = await Client.GetAsync("api/BusinessTypes/GetAll)");
+            HttpResponseMessage response = await Client.GetAsync("api/BusinessTypes/GetAll");
 
             result.Status = response.StatusCode;
             var stringResponse = await response.Content.ReadAsStringAsync();
@@ -140,7 +140,7 @@ namespace GurruPCL
                 return result;
             }
 
-            HttpResponseMessage response = await Client.GetAsync("api/SalesActivities/GetAll)");
+            HttpResponseMessage response = await Client.GetAsync("api/SalesActivities/GetAll");
 
             result.Status = response.StatusCode;
             var stringResponse = await response.Content.ReadAsStringAsync();
