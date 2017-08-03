@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 namespace GurruPCL
 {
 	public class SalesPerson
@@ -6,10 +7,19 @@ namespace GurruPCL
 		public SalesPerson()
 		{
 		}
-		public Guid Id { get; set; }
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
-		public Guid? BusinessTypeId { get; set; }
-		public string Email { get; set; }
+
+        [JsonProperty("id")]
+        public Guid Id { get; set; }
+
+        [JsonProperty("firstName")]
+        public string FirstName { get; set; }
+
+        [JsonProperty("lastName")]
+        public string LastName { get; set; }
+
+        public Guid? BusinessTypeId { get; set; }
+
+        [JsonProperty("email")]
+        public string Email { get; set; }
 	}
 }

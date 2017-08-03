@@ -51,7 +51,7 @@ namespace GurruPCL.CustomViews
             Missing = string.IsNullOrEmpty(e.NewTextValue);
 
             if (!string.IsNullOrEmpty(e.NewTextValue) && e.NewTextValue.Length > MaxChar)
-                (sender as Editor).Text = e.OldTextValue ?? string.Empty;
+                (sender as Entry).Text = e.OldTextValue ?? string.Empty;
         }
     }
 }

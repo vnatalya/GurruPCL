@@ -14,7 +14,14 @@ namespace GurruPCL.CustomViews
     {
         public EventHandler DropdownTapped;
 
-        public string ValueText { set { ErrorLabel.Text = value; } }
+        public string ValueText { set
+            {
+                Device.BeginInvokeOnMainThread(() =>
+               {
+                   ErrorLabel.Text = value;
+               });
+            }
+        }
 
         public string ErrorText { set { ErrorLabel.Text = value; } }
 

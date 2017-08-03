@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using XLabs.Ioc;
 using Tesseract;
-
+using GurruPCL.ViewModels;
 
 namespace GurruPCL
 {
@@ -18,7 +18,7 @@ namespace GurruPCL
         {
             InitializeComponent();
             
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(LoginViewModel.Instance.IsLoggedIn ? new MainPage() as Page :  new LoginPage() as Page);
         }
 
         protected override void OnStart()

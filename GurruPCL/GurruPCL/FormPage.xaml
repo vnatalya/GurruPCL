@@ -140,9 +140,9 @@
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <custom:GurruButton x:Name="CreateButton" Image="check.png" Text="Create" Clicked="FooterButton_Clicked" Scale="0.8" HorizontalOptions="Start"/>
-                        <custom:GurruButton x:Name="QualifyButton" Image="check.png" Text="Create And Qualify" Clicked="FooterButton_Clicked" Scale="0.8" HorizontalOptions="Center"/>
-                        <custom:GurruButton x:Name="CancelButton" Image="close.png" Text="Close" Clicked="FooterButton_Clicked" BackgroundColor="Red" Scale="0.8" HorizontalOptions="End"/>
+                        <custom:GurruButton x:Name="CreateButton" Text="Create" Clicked="FooterButton_Clicked" Scale="0.8" HorizontalOptions="Start"/>
+                        <custom:GurruButton x:Name="QualifyButton" Text="Create And Qualify" Clicked="FooterButton_Clicked" Scale="0.8" HorizontalOptions="Center"/>
+                        <custom:GurruButton x:Name="CancelButton" Text="Close" Clicked="FooterButton_Clicked" BackgroundColor="Red" Scale="0.8" HorizontalOptions="End"/>
                     </StackLayout>
                     
                 </StackLayout>

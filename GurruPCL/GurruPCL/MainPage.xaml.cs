@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GurruPCL.Helpers;
+using GurruPCL.ViewModels;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using XLabs.Ioc;
@@ -20,7 +22,13 @@ namespace GurruPCL
 
         private async void AddLeadButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new FormPage(), false);
+            SetLoader(true);
+            var res = await FormViewModel.Instance.GetInitializedAsync();
+            SetLoader(false);
+            //if (res.Status != System.Net.HttpStatusCode.OK)
+            //    await DisplayAlert(res.Title, res.Message, "Ok");
+            //else
+                await Navigation.PushAsync(new FormPage(), false);
         }
 
         private async void FromVCardButton_Clicked(object sender, EventArgs e)
@@ -50,21 +58,28 @@ namespace GurruPCL
 
                     bool tooLongProccessing = false;
 
-                    //Device.StartTimer(TimeSpan.FromMinutes(1), () =>
-                    //{
-                    //    tooLongProccessing = true;
-                    //    SetLoader(false);
-                    //    DisplayAlert("Error", "Sorry, couldn't parse the photo", "Ok");
-                    //    return false;
-                    //});
+                    Device.StartTimer(TimeSpan.FromSeconds(40), () =>
+                    {
+                        tooLongProccessing = true;
+                        SetLoader(false);
+                        DisplayAlert("Error", "Sorry, couldn't parse the photo", "Ok");
+                        return false;
+                    });
 
-                    var res2 = await App.TesseractApi.SetImage(mediaFile.Path);
+                    try
+                    {
+                        var res2 = await App.TesseractApi.SetImage(mediaFile.Path);
+                    }
+                    catch (Exception btm)
+                    {
+                        SetLoader(false);
+                        DisplayAlert("Error", "Sorry, couldn't parse the photo", "Ok");
+                    }
+                    if (tooLongProccessing && string.IsNullOrEmpty(App.TesseractApi.Text))
+                        return;
 
-                    //if (tooLongProccessing)
-                    //    return;
-
-                    string text = App.TesseractApi.Text;
-
+                    var res3 = FormViewModel.Instance.GetInitializedAsync();
+                    FormViewModel.Instance.CurrentForm = PhotoHelper.GetFormFrom(App.TesseractApi.Text);
 
                     await Navigation.PushAsync(new FormPage(), false);                 
                 }

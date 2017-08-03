@@ -45,15 +45,27 @@ namespace GurruPCL
 			if (string.IsNullOrEmpty(UsernameEntry.Text) || string.IsNullOrEmpty(PasswordEntry.Text))
 				return;
 
-			//var res = await ViewModel.LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
+            SetLoader(true);
 
-			//if (res.Status != System.Net.HttpStatusCode.OK)
-			//	await DisplayAlert(res.Title, res.Message, "Ok");
-			//else
-			//{
-	            await Navigation.PushAsync(new MainPage());
-	            Navigation.RemovePage(this);
-			//}
+            var res = await ViewModel.LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
+
+            if (res.Status != System.Net.HttpStatusCode.OK)
+            {
+                await DisplayAlert(res.Title, res.Message, "Ok");
+                SetLoader(false);
+            }
+            else
+            {
+                await Navigation.PushAsync(new MainPage());
+                Navigation.RemovePage(this);
+            }
+        }
+
+        void SetLoader(bool show)
+        {
+            Loader.IsRunning = show;
+            Loader.IsVisible = show;
+            LoginButton.IsEnabled = !show;
         }
     }
 }
