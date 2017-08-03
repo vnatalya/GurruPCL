@@ -38,20 +38,20 @@
                         <Label Text="Quick create new" FontSize="Large" FontAttributes="Bold" TextColor="#666666" VerticalOptions="Center"/>
                     </StackLayout>
 
-                    <!--Organization-->
+                    <!--Organisation-->
                     <StackLayout  BackgroundColor="#ebe9e9" Padding="1" HorizontalOptions="FillAndExpand" Margin="10">
                         <StackLayout BackgroundColor="White">
-                            <Label Text="ORGANIZATION" TextColor="#151515" FontSize="Large" Margin="16, 8, 0, 0"/>
+                            <Label Text="ORGANISATION" TextColor="#151515" FontSize="Large" Margin="16, 8, 0, 0"/>
 
                             <!--Name-->
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Organazation Name" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                                <Label Text="Organasation Name" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
                                 <Label Text="*" TextColor="#ff0f0f" Margin="0, 10, 0, 0"/>
                             </StackLayout>                            
                             <custom:GurruEditField x:Name="OrganizationName" Margin="16,0,16,0" HorizontalOptions="FillAndExpand"/>
 
                             <!--ParentOrganization-->
-                            <Label Text="Parent Organization" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
+                            <Label Text="Parent Organisation" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
                             <custom:GurruDropdownField x:Name="ParentOrganization" Margin="16,0,16,0" HorizontalOptions="FillAndExpand"/>
 
                             <!--BusinessType-->
@@ -140,9 +140,9 @@
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <custom:GurruButton x:Name="CreateButton" Text="Create" Clicked="FooterButton_Clicked" Scale="0.8" HorizontalOptions="Start"/>
-                        <custom:GurruButton x:Name="QualifyButton" Text="Create And Qualify" Clicked="FooterButton_Clicked" Scale="0.8" HorizontalOptions="Center"/>
-                        <custom:GurruButton x:Name="CancelButton" Text="Close" Clicked="FooterButton_Clicked" BackgroundColor="Red" Scale="0.8" HorizontalOptions="End"/>
+                        <custom:GurruButton x:Name="CreateButton" Text="Create" Clicked="FooterButton_Clicked" Scale="0.8" HorizontalOptions="StartAndExpand"/>
+                        <custom:GurruButton x:Name="QualifyButton" Text="Create And Qualify" Clicked="FooterButton_Clicked" Scale="0.8" HorizontalOptions="CenterAndExpand"/>
+                        <custom:GurruButton x:Name="CancelButton" Text="Close" Clicked="FooterButton_Clicked" BackgroundColor="Red" Scale="0.8" HorizontalOptions="EndAndExpand"/>
                     </StackLayout>
                     
                 </StackLayout>

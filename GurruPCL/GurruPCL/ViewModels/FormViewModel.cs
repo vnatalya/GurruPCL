@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GurruPCL.Models;
 using GurruPCL.Models.Results;
@@ -41,8 +42,6 @@ namespace GurruPCL.ViewModels
 
         public async Task<BaseResult> GetInitializedAsync()
         {
-            CurrentForm = new Form();
-
             var tasks = new List<Task<BaseResult>>();
 
 			tasks.Add(GetBusinessTypesAsync());
@@ -57,6 +56,11 @@ namespace GurruPCL.ViewModels
                 if (results[i].Status != System.Net.HttpStatusCode.OK)
                     return results[i];
             }
+
+			CurrentForm = new Form()
+			{
+				SalesActivity = SalesActivities.FirstOrDefault(x => x.Name.Equals("New Customer"))
+			};
 
             return new BaseResult();
         }
@@ -101,19 +105,10 @@ namespace GurruPCL.ViewModels
             return result;
         }
 
-        private async Task<BaseResult> GetSourcesAsync()
+		public async Task<BaseResult> SaveCurrentFormAsync(bool qualify)
         {
-            var result = await RequestSender.GetSourcesAsync();
-
-            //if (result.Status == System.Net.HttpStatusCode.OK)
-            //    Sou = result.Items;
-
-            return result;
-        }
-
-        public async Task<BaseResult> SaveCurrentFormAsync()
-        {
-            return new BaseResult();
+			var res = await RequestSender.SaveFormAsync(CurrentForm, qualify);
+            return res;
         }
 
     }

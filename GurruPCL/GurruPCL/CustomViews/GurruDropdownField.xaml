@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GurruPCL.CustomViews.GurruDropdownField">
@@ -7,7 +7,7 @@
         <StackLayout Padding="0" Margin="0" Spacing="0">
             
             <StackLayout x:Name="Border" BackgroundColor="#cdcdcd" Padding="1" HorizontalOptions="FillAndExpand" Margin="0" Orientation="Horizontal" Spacing="0">
-                <Label x:Name="ValueLabel" TextColor="#666666" HorizontalOptions="FillAndExpand" BackgroundColor="#ebe9e9"/>
+                <Label x:Name="ValueLabel" TextColor="#666666" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#ebe9e9"/>
                 <BoxView VerticalOptions="StartAndExpand" WidthRequest="1" BackgroundColor="#cdcdcd"/>
                 <Image Source="down.png" BackgroundColor="White"/>
                 <StackLayout.GestureRecognizers>

@@ -16,7 +16,7 @@ namespace GurruPCL
 
         [JsonProperty("lastName")]
         public string LastName { get; set; }
-
+		[JsonProperty("businessTypeId")]
         public Guid? BusinessTypeId { get; set; }
 
         [JsonProperty("email")]

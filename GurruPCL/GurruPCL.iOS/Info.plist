@@ -47,5 +47,35 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>GurruPCL</string>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict/>
+		<dict/>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict/>
+	</array>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>CFBundleTypeName</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>CFBundleTypeName</string>
+		</dict>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict/>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to take photo</string>
+	<key>kTCCServiceMediaLibrary</key>
+	<string>Used to get image</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to get image</string>
 </dict>
 </plist>

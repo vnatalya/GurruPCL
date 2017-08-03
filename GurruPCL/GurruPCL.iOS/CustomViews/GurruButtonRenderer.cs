@@ -35,13 +35,13 @@ namespace GurruPCL.iOS.CustomViews
 		{
 			base.OnElementChanged(e);
 
-			this.Layer.CornerRadius = 5;
+			Layer.CornerRadius = 5;
 
 			CAGradientLayer highlightedLayer;
 			CAGradientLayer normalLayer;
 
 			normalLayer = new CAGradientLayer();
-			normalLayer.Frame = this.Layer.Bounds;
+			normalLayer.Frame = Layer.Bounds;
 
 			normalLayer.Colors = new CGColor[]
 			{
@@ -51,10 +51,10 @@ namespace GurruPCL.iOS.CustomViews
 
 			normalLayer.Locations = new NSNumber[] { 0.0f, 1.0f };
 
-			normalLayer.CornerRadius = this.Layer.CornerRadius;
+			normalLayer.CornerRadius = Layer.CornerRadius;
 
 			highlightedLayer = new CAGradientLayer();
-			highlightedLayer.Frame = this.Layer.Bounds;
+			highlightedLayer.Frame = Layer.Bounds;
 
 			highlightedLayer.Colors = new CGColor[]
 			{
@@ -64,10 +64,11 @@ namespace GurruPCL.iOS.CustomViews
 
 			highlightedLayer.Locations = new NSNumber[] { 0.0f, 1.0f };
 
-			highlightedLayer.CornerRadius = this.Layer.CornerRadius;
+			highlightedLayer.CornerRadius = Layer.CornerRadius;
 
 			if (e.OldElement == null)
 			{
+				Control.ContentEdgeInsets = new UIEdgeInsets(0, 4, 0, 4);
 				var layer = Control?.Layer.Sublayers.LastOrDefault();
 				if (Control != null)
 				{

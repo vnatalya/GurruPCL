@@ -33,15 +33,17 @@ namespace GurruPCL
         {
             //Organization
             OrganizationName.Mandatory = true;
-            OrganizationName.ErrorText = "Organization Name cannot be empty";
+            OrganizationName.ErrorText = "Organisation Name cannot be empty";
             OrganizationName.ValueText = ViewModel.CurrentForm.OrganizationName;
 
             ParentOrganization.DropdownTapped += DropdownTapped;
+			ParentOrganization.ValueText = "Enter Parent Organisation";
 
             BusinessPhone.EntryKeyboard = Keyboard.Telephone;            
-            BusinessType.ErrorText = "Business Type is required";
             BusinessPhone.ValueText = ViewModel.CurrentForm.BusinessPhone;
 
+			BusinessType.ErrorText = "Business Type is required";
+			BusinessType.ValueText = "Select Business Type...";
             BusinessType.DropdownTapped += DropdownTapped;
 
             Email.EntryKeyboard = Keyboard.Email;
@@ -58,12 +60,15 @@ namespace GurruPCL
 
             //Details
             SalesPerson.ErrorText = "Sales Person is required";
-            SalesActivity.DropdownTapped += DropdownTapped;
+			SalesPerson.ValueText = "Select Person Person...";
+			SalesPerson.DropdownTapped += DropdownTapped;
 
-            SalesActivity.ErrorText = "Sales Person is required";
-            SalesPerson.DropdownTapped += DropdownTapped;
+			SalesActivity.ErrorText = "Sales Acrivity is required";
+			SalesActivity.ValueText = ViewModel.CurrentForm.SalesActivity?.Name;
+			SalesActivity.DropdownTapped += DropdownTapped;
 
-            Source.ErrorText = "Sales Person is required";
+			Source.ErrorText = "Sourceis required";
+			Source.ValueText = "Select Source...";
             Source.DropdownTapped += DropdownTapped;
         }
 
@@ -88,8 +93,13 @@ namespace GurruPCL
                 picker.ItemsSource = personsList;
             }
 
-            if (sender.Equals(Source))
-                return;//  picker.ItemsSource = ViewModel.Organizations.Select(o => o.Name).ToList();
+			if (sender.Equals(Source))
+			{ 
+				var sourceList = Enum.GetNames(typeof(Form.Source)).ToList();
+				for (int i = 0; i < sourceList.Count; ++i)
+					sourceList[i] = sourceList[i].Replace('_', ' ');
+				picker.ItemsSource = sourceList;
+			}
 
             picker.SelectedIndexChanged += (s, ea) =>
             {
@@ -108,14 +118,15 @@ namespace GurruPCL
                 if (sender.Equals(SalesPerson))
                 {
                     var text = picker.ItemsSource[picker.SelectedIndex].ToString();
-                    var mail = text.Remove(0, text.IndexOf("\n") != -1 ? text.IndexOf("\n") : 0);
+					var index = text.IndexOf("\n");
+					var mail = text.Remove(0, index != -1 && text.Length > index + 1 ? index + 1 : 0);
                     ViewModel.CurrentForm.SalesPerson = ViewModel.SalesPersons.FirstOrDefault(x => x.Email.Equals(mail));
                 }
 
-                var txt = picker.ItemsSource[picker.SelectedIndex].ToString();
-                Device.BeginInvokeOnMainThread(() => {
-                    f.ValueText = txt;
-                });
+				if (sender.Equals(Source))
+					ViewModel.CurrentForm.FormSource = (Form.Source)picker.SelectedIndex + 1;
+
+                f.ValueText = picker.ItemsSource[picker.SelectedIndex].ToString();
             };
 
             picker.Unfocused += (s, ea) =>
@@ -124,7 +135,10 @@ namespace GurruPCL
             };
 
             ((sender as GurruDropdownField).Parent as StackLayout).Children.Add(picker);
-            picker.Focus();
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				picker.Focus();
+			});
 
         }
 
@@ -147,19 +161,28 @@ namespace GurruPCL
 
         private async void FooterButton_Clicked(object sender, EventArgs e)
         {
+			if (sender == CancelButton)
+			{
+				await Navigation.PopAsync();
+				return;
+			}
+
+			SetLoader(true);
+
             var res = new BaseResult();
 
-            if (sender == CreateButton && SetAndValidateCurrentFormFields())
-                res = await ViewModel.SaveCurrentFormAsync();
+			if (sender == CreateButton && SetAndValidateCurrentFormFields())
+				res = await ViewModel.SaveCurrentFormAsync(false);
 
             if (sender == QualifyButton && SetAndValidateCurrentFormFields())
-                res = await ViewModel.SaveCurrentFormAsync();
+                res = await ViewModel.SaveCurrentFormAsync(true);
 
-            if (sender == CancelButton)
-                await Navigation.PopAsync();
+			SetLoader(false);
 
-            if (res.Status != System.Net.HttpStatusCode.OK)
-                await DisplayAlert(res.Title, res.Message, "Ok");
+			if (res.Status != System.Net.HttpStatusCode.OK)
+				await DisplayAlert(res.Title, res.Message, "Ok");
+			else
+				await DisplayAlert("Infornmation", "Form was successfully saved", "Ok");
         }
 
         private bool SetAndValidateCurrentFormFields()
@@ -183,8 +206,21 @@ namespace GurruPCL
             FirstName.Missing = string.IsNullOrEmpty(FirstName.ValueText);
             LastName.Missing = string.IsNullOrEmpty(LastName.ValueText);
 
+			SalesPerson.Missing = ViewModel.CurrentForm.SalesPerson == null;
+			BusinessType.Missing = ViewModel.CurrentForm.BusinessType == null;
+
             return (!OrganizationName.Missing || FirstName.Missing || LastName.Missing || 
                 ViewModel.CurrentForm.SalesPerson == null || ViewModel.CurrentForm.SalesActivity == null || ViewModel.CurrentForm.BusinessType == null);
         }
+
+		void SetLoader(bool show)
+		{
+			CancelButton.IsEnabled = !show;
+			CreateButton.IsEnabled = !show;
+			QualifyButton.IsEnabled = !show;
+
+			Loader.IsVisible = show;
+			Loader.IsRunning = show;
+		}
     }
 }

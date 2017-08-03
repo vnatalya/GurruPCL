@@ -14,16 +14,18 @@ namespace GurruPCL.CustomViews
     {
         public EventHandler DropdownTapped;
 
-        public string ValueText { set
-            {
-                Device.BeginInvokeOnMainThread(() =>
-               {
-                   ErrorLabel.Text = value;
-               });
-            }
-        }
+		public string ValueText { set { ValueLabel.Text = value.Replace('_', ' '); } }
 
         public string ErrorText { set { ErrorLabel.Text = value; } }
+
+		public bool Missing 
+		{ 
+			set 
+			{
+				Border.BackgroundColor = value ? Color.FromHex("#ef3f3f") : Color.FromHex("#cdcdcd");
+				ErrorFiled.IsVisible = value; 
+			} 
+		}
 
         public GurruDropdownField()
         {
@@ -32,6 +34,8 @@ namespace GurruPCL.CustomViews
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
+			Missing = false;
+
             if (DropdownTapped != null)
                 DropdownTapped.Invoke(this, new EventArgs());
         }

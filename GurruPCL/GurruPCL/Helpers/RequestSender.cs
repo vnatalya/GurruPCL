@@ -46,7 +46,7 @@ namespace GurruPCL
                 return result;
             }
 
-            var content = new StringContent("grant_type=password&username=wtAdmin&password=Aa123456!", Encoding.UTF8);
+			var content = new StringContent(string.Format("grant_type=password&username={0}&password={1}", username, password), Encoding.UTF8);
             HttpResponseMessage response = await Client.PostAsync("token", content);
 
             result.Status = response.StatusCode;
@@ -186,33 +186,35 @@ namespace GurruPCL
 
         }
 
-        public static async Task<SourceResult> GetSourcesAsync()
-        {
-            var result = new SourceResult();
+		public static async Task<BaseResult> SaveFormAsync(Form form, bool qualify)
+		{
+			var result = new BaseResult();
 
-            if (!IsInternetAwailable)
-            {
-                result.Title = "No internet";
-                result.Message = "Action is not possible as there is no internet connection";
-                return result;
-            }
+			if (!IsInternetAwailable)
+			{
+				result.Title = "No internet";
+				result.Message = "Action is not possible as there is no internet connection";
+				return result;
+			}
 
-            HttpResponseMessage response = await Client.GetAsync("api/Users/GetAllByRole?roleNames=Sales,Approvers&_=1501719298586)");
+			var json = JsonConvert.SerializeObject(form);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			HttpResponseMessage response = await Client.PostAsync(qualify ? "api/Leads/QuickCreateAndQuialify" : "api/Leads/QuickCreate", content);
 
-            result.Status = response.StatusCode;
-            var stringResponse = await response.Content.ReadAsStringAsync();
+			result.Status = response.StatusCode;
+			var stringResponse = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessStatusCode)
-            {
-                var error = JsonConvert.DeserializeObject<ErrorResponse>(stringResponse);
-                result.Title = string.IsNullOrEmpty(error.Error) ? "Error" : error.Error;
-                result.Message = string.IsNullOrEmpty(error.Desscription) ? "An error has occured" : error.Desscription;
-            }
-            else
-                result.Items = JsonConvert.DeserializeObject<List<Source>>(stringResponse);
+			//if (!response.IsSuccessStatusCode)
+			//{
+			//	var error = JsonConvert.DeserializeObject<ErrorResponse>(stringResponse);
+			//	result.Title = string.IsNullOrEmpty(error.Error) ? "Error" : error.Error;
+			//	result.Message = string.IsNullOrEmpty(error.Desscription) ? "An error has occured" : error.Desscription;
+			//}
+			//else
+				//result.Items = JsonConvert.DeserializeObject<List<Source>>(stringResponse);
 
-            return result;
+			return result;
 
-        }
+		}
     }
 }
