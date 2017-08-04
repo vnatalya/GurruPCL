@@ -7,7 +7,7 @@
         <StackLayout Padding="0" Margin="0" Spacing="0">
             
             <StackLayout x:Name="Border" BackgroundColor="#cdcdcd" Padding="1" HorizontalOptions="FillAndExpand" Margin="0" Orientation="Horizontal" Spacing="0">
-                <Label x:Name="ValueLabel" TextColor="#666666" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#ebe9e9"/>
+                <Label x:Name="ValueLabel" TextColor="#666666" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#ebe9e9" FontSize="Medium"/>
                 <BoxView VerticalOptions="StartAndExpand" WidthRequest="1" BackgroundColor="#cdcdcd"/>
                 <Image Source="down.png" BackgroundColor="White"/>
                 <StackLayout.GestureRecognizers>

@@ -17,7 +17,7 @@ using Android.Util;
 
 namespace GurruPCL.Droid
 {
-    [Activity(Theme = "@style/MainTheme", MainLauncher = false)]
+    [Activity(Theme = "@style/MainTheme", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -26,6 +26,8 @@ namespace GurruPCL.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
+
+            RequestedOrientation = ScreenOrientation.Portrait | ScreenOrientation.Nosensor;
 
             App.DeviceHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
             App.DeviceWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;

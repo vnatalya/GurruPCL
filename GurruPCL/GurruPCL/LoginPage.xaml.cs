@@ -23,6 +23,13 @@ namespace GurruPCL
             NavigationPage.SetHasNavigationBar(this, false);
 
             Container.WidthRequest = App.DeviceWidth;
+
+            if (ViewModel.RememberMe)
+            {
+                PasswordEntry.Text = ViewModel.Password;
+                UsernameEntry.Text = ViewModel.Username;
+            }
+            RememberImage.Source = ViewModel.RememberMe ? "checked.png" : "unchecked.png";
         }
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
@@ -47,7 +54,10 @@ namespace GurruPCL
 
             SetLoader(true);
 
-            var res = await ViewModel.LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
+            ViewModel.Password = PasswordEntry.Text;
+            ViewModel.Username = UsernameEntry.Text;
+
+            var res = await ViewModel.LoginAsync();
 
             if (res.Status != System.Net.HttpStatusCode.OK)
             {

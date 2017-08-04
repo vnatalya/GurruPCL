@@ -14,7 +14,7 @@ namespace GurruPCL.CustomViews
     {
         public EventHandler DropdownTapped;
 
-		public string ValueText { set { ValueLabel.Text = value.Replace('_', ' '); } }
+		public string ValueText { set { ValueLabel.Text = value; } }
 
         public string ErrorText { set { ErrorLabel.Text = value; } }
 

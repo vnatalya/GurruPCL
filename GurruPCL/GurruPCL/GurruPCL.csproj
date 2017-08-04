@@ -38,6 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomViews\AutoresizeEditor.cs" />
     <Compile Include="CustomViews\GurruButton.cs" />
     <Compile Include="CustomViews\GurruDropdownField.xaml.cs">
       <DependentUpon>GurruDropdownField.xaml</DependentUpon>
@@ -55,6 +56,7 @@
     <Compile Include="FormPage.xaml.cs">
       <DependentUpon>FormPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\IPhotoCleaner.cs" />
     <Compile Include="Helpers\PhotoHelper.cs" />
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>

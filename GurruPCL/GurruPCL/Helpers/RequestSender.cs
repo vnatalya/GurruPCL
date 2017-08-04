@@ -10,6 +10,7 @@ using GurruPCL.Models.Results;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using static GurruPCL.Models.Results.OrganizationResult;
+using GurruPCL.ViewModels;
 
 namespace GurruPCL
 {
@@ -27,9 +28,13 @@ namespace GurruPCL
                 {
                     if (client == null)
                     {
-                        client = new System.Net.Http.HttpClient(new NativeMessageHandler());
+                        client = new HttpClient(new NativeMessageHandler());
                         client.BaseAddress = new Uri("https://premierdev.gurru.com.au");
                     }
+
+                    if (!string.IsNullOrEmpty(LoginViewModel.Instance.TokenScheme) && !string.IsNullOrEmpty(LoginViewModel.Instance.AccessToken))
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(LoginViewModel.Instance.TokenScheme, LoginViewModel.Instance.AccessToken);
+
                     return client;
                 }
             }
@@ -41,6 +46,7 @@ namespace GurruPCL
 
             if (!IsInternetAwailable)
             {
+                result.Status = System.Net.HttpStatusCode.GatewayTimeout;
                 result.Title = "No internet";
                 result.Message = "Action is not possible as there is no internet connection";
                 return result;
@@ -61,7 +67,6 @@ namespace GurruPCL
             else
             {
                 result.User = JsonConvert.DeserializeObject<User>(stringResponse);
-                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(result.User.TokenType, result.User.AccessToken);
             }
             return result;
 		}
@@ -72,6 +77,7 @@ namespace GurruPCL
 
             if (!IsInternetAwailable)
             {
+                result.Status = System.Net.HttpStatusCode.GatewayTimeout;
                 result.Title = "No internet";
                 result.Message = "Action is not possible as there is no internet connection";
                 return result;
@@ -100,6 +106,7 @@ namespace GurruPCL
 
             if (!IsInternetAwailable)
             {
+                result.Status = System.Net.HttpStatusCode.GatewayTimeout;
                 result.Title = "No internet";
                 result.Message = "Action is not possible as there is no internet connection";
                 return result;
@@ -135,6 +142,7 @@ namespace GurruPCL
 
             if (!IsInternetAwailable)
             {
+                result.Status = System.Net.HttpStatusCode.GatewayTimeout;
                 result.Title = "No internet";
                 result.Message = "Action is not possible as there is no internet connection";
                 return result;
@@ -163,6 +171,7 @@ namespace GurruPCL
 
             if (!IsInternetAwailable)
             {
+                result.Status = System.Net.HttpStatusCode.GatewayTimeout;
                 result.Title = "No internet";
                 result.Message = "Action is not possible as there is no internet connection";
                 return result;
@@ -192,7 +201,8 @@ namespace GurruPCL
 
 			if (!IsInternetAwailable)
 			{
-				result.Title = "No internet";
+                result.Status = System.Net.HttpStatusCode.GatewayTimeout;
+                result.Title = "No internet";
 				result.Message = "Action is not possible as there is no internet connection";
 				return result;
 			}
@@ -203,15 +213,6 @@ namespace GurruPCL
 
 			result.Status = response.StatusCode;
 			var stringResponse = await response.Content.ReadAsStringAsync();
-
-			//if (!response.IsSuccessStatusCode)
-			//{
-			//	var error = JsonConvert.DeserializeObject<ErrorResponse>(stringResponse);
-			//	result.Title = string.IsNullOrEmpty(error.Error) ? "Error" : error.Error;
-			//	result.Message = string.IsNullOrEmpty(error.Desscription) ? "An error has occured" : error.Desscription;
-			//}
-			//else
-				//result.Items = JsonConvert.DeserializeObject<List<Source>>(stringResponse);
 
 			return result;
 

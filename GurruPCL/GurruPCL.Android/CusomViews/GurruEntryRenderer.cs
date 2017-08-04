@@ -12,11 +12,10 @@ namespace GurruPCL.Droid.CusomViews
             if (e.OldElement == null && Control != null)
             {
                 Control.SetBackgroundDrawable(null);
-                Control.InputType = InputTypes.TextFlagNoSuggestions;
+                Control.InputType = InputTypes.TextFlagNoSuggestions | InputTypes.TextVariationVisiblePassword;
+                Control.SetLayerType(Android.Views.LayerType.None, new Android.Graphics.Paint());
                 Control.SetBackgroundColor(Android.Graphics.Color.Transparent);
                 Control.Background = null;
-                Control.SetSingleLine(true);
-				Control.PaintFlags = Android.Graphics.PaintFlags.UnderlineText; 
 			}
         }
     }

@@ -12,7 +12,7 @@
     </ContentPage.Padding>
     
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView x:Name="Scroll">
             <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
                 
                 <StackLayout x:Name="Container" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
@@ -133,7 +133,7 @@
                             <Label Text="Details Of Opportunity" TextColor="#666666" Margin="16,8,0,0" FontSize="Medium"/>
 
                             <StackLayout BackgroundColor="#cdcdcd" Padding="2" HorizontalOptions="FillAndExpand" Margin="10">
-                                <Editor x:Name="DetailsOfOpportunity" TextColor="#666666" HorizontalOptions="FillAndExpand" BackgroundColor="#ebe9e9" TextChanged="DetailsOfOpportunity_TextChanged"/>
+                                <custom:AutoresizeEditor x:Name="DetailsOfOpportunity" TextColor="#666666" HorizontalOptions="FillAndExpand" BackgroundColor="#ebe9e9" TextChanged="DetailsOfOpportunity_TextChanged"/>
                             </StackLayout>
 
                         </StackLayout>
@@ -147,7 +147,11 @@
                     
                 </StackLayout>
 
-              <ActivityIndicator x:Name="Loader" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsRunning="False" IsVisible="False"/>
+                <ActivityIndicator x:Name="Loader" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsRunning="False" IsVisible="False">
+                    <ActivityIndicator.Scale>
+                        <OnPlatform x:TypeArguments="x:Double" Android="0.2" />
+                    </ActivityIndicator.Scale>
+                </ActivityIndicator>
 
             </AbsoluteLayout>
         </ScrollView>

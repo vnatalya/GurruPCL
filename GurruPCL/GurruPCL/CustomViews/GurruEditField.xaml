@@ -6,7 +6,7 @@
     <ContentView.Content>
         <StackLayout Padding="0" Margin="0" Spacing="0">
             <StackLayout x:Name="Border" BackgroundColor="#cdcdcd" Padding="2" HorizontalOptions="FillAndExpand" Margin="0">
-                <custom:GurruEntry x:Name="EditText" TextColor="#666666" HorizontalOptions="FillAndExpand" BackgroundColor="#ebe9e9" TextChanged="Entry_TextChanged"/>
+                <custom:GurruEntry x:Name="EditText" TextColor="#666666" HorizontalOptions="FillAndExpand" BackgroundColor="#ebe9e9" TextChanged="Entry_TextChanged" Completed="EditText_Completed"/>
             </StackLayout>
             <StackLayout x:Name="ErrorFiled" BackgroundColor="#fbeed5" HorizontalOptions="Start" Orientation="Horizontal" Padding="0" Margin="0" IsVisible="False">
                 <Image Source="error.png" Scale="0.5"/>

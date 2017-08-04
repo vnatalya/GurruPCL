@@ -59,7 +59,11 @@
                 
             </StackLayout>
 
-            <ActivityIndicator x:Name="Loader" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsVisible="false" IsRunning="false"/>
+            <ActivityIndicator x:Name="Loader" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsVisible="false" IsRunning="false">
+                <ActivityIndicator.Scale>
+                    <OnPlatform x:TypeArguments="x:Double" Android="0.2" />
+                </ActivityIndicator.Scale>
+            </ActivityIndicator>
 
         </AbsoluteLayout>
     </ContentPage.Content>

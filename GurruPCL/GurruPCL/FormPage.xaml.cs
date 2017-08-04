@@ -35,28 +35,34 @@ namespace GurruPCL
             OrganizationName.Mandatory = true;
             OrganizationName.ErrorText = "Organisation Name cannot be empty";
             OrganizationName.ValueText = ViewModel.CurrentForm.OrganizationName;
+            OrganizationName.Completed += NaligateNextField;
 
             ParentOrganization.DropdownTapped += DropdownTapped;
 			ParentOrganization.ValueText = "Enter Parent Organisation";
 
             BusinessPhone.EntryKeyboard = Keyboard.Telephone;            
             BusinessPhone.ValueText = ViewModel.CurrentForm.BusinessPhone;
+            BusinessPhone.Completed += NaligateNextField;
 
-			BusinessType.ErrorText = "Business Type is required";
+            BusinessType.ErrorText = "Business Type is required";
 			BusinessType.ValueText = "Select Business Type...";
             BusinessType.DropdownTapped += DropdownTapped;
 
             Email.EntryKeyboard = Keyboard.Email;
             Email.ValueText = ViewModel.CurrentForm.Email;
+            Email.Completed += NaligateNextField;
 
             //Contact
             FirstName.Mandatory = true;
             FirstName.ErrorText = "First Name cannot be empty";
+            FirstName.Completed += NaligateNextField;
 
             LastName.Mandatory = true;
             LastName.ErrorText = "Last Name cannot be empty";
+            LastName.Completed += NaligateNextField;
 
             ContactPhone.EntryKeyboard = Keyboard.Telephone;
+            ContactPhone.Completed += NaligateNextField;
 
             //Details
             SalesPerson.ErrorText = "Sales Person is required";
@@ -72,10 +78,33 @@ namespace GurruPCL
             Source.DropdownTapped += DropdownTapped;
         }
 
-        private async void DropdownTapped(object sender, EventArgs e)
+        private void NaligateNextField(object sender, EventArgs e)
         {
+            if (sender == OrganizationName  )
+                BusinessPhone.StartEditing();
+
+            if (sender == BusinessPhone)
+                Email.StartEditing();
+
+            if (sender == Email)
+                FirstName.StartEditing();
+
+            if (sender == FirstName)
+                LastName.StartEditing();
+
+            if (sender == LastName)
+                ContactPhone.StartEditing();
+
+            if (sender == ContactPhone)
+                DetailsOfOpportunity.Focus();
+        }
+
+        private void DropdownTapped(object sender, EventArgs e)
+        {
+            Scroll.IsEnabled = false;
+
             var picker = new Picker();
-            var f = sender as GurruDropdownField;
+
             if (sender.Equals(ParentOrganization))
                 picker.ItemsSource = ViewModel.Organizations.Select(o => o.Name).ToList();
 
@@ -96,7 +125,8 @@ namespace GurruPCL
 			if (sender.Equals(Source))
 			{ 
 				var sourceList = Enum.GetNames(typeof(Form.Source)).ToList();
-				for (int i = 0; i < sourceList.Count; ++i)
+                sourceList.Sort();
+				for (int i = 1; i < sourceList.Count; ++i)
 					sourceList[i] = sourceList[i].Replace('_', ' ');
 				picker.ItemsSource = sourceList;
 			}
@@ -123,14 +153,22 @@ namespace GurruPCL
                     ViewModel.CurrentForm.SalesPerson = ViewModel.SalesPersons.FirstOrDefault(x => x.Email.Equals(mail));
                 }
 
-				if (sender.Equals(Source))
-					ViewModel.CurrentForm.FormSource = (Form.Source)picker.SelectedIndex + 1;
+                (sender as GurruDropdownField).ValueText = picker.ItemsSource[picker.SelectedIndex].ToString();
 
-                f.ValueText = picker.ItemsSource[picker.SelectedIndex].ToString();
+                if (sender.Equals(Source))
+                {
+                    (sender as GurruDropdownField).ValueText = (string)picker.SelectedItem;
+                    var name = ((string)picker.SelectedItem).Replace(' ', '_');
+                    ViewModel.CurrentForm.FormSource = (Form.Source) Enum.Parse(typeof(Form.Source), name); 
+                }
+
+
+                Scroll.IsEnabled = true;
             };
 
             picker.Unfocused += (s, ea) =>
             {
+                Scroll.IsEnabled = true;
                 ((sender as GurruDropdownField).Parent as StackLayout).Children.Remove(picker);
             };
 
@@ -144,8 +182,11 @@ namespace GurruPCL
 
         private async void LogoutButton_Tapped(object sender, EventArgs e)
         {
+            LoginViewModel.Instance.Logout();
+
+            App.Current.MainPage = new NavigationPage(new LoginPage());
+
             await Navigation.PopToRootAsync();
-            await Navigation.PushAsync(new LoginPage());
         }
 
         private void BackButton_Clicked(object sender, EventArgs e)
@@ -167,15 +208,18 @@ namespace GurruPCL
 				return;
 			}
 
-			SetLoader(true);
-
             var res = new BaseResult();
 
-			if (sender == CreateButton && SetAndValidateCurrentFormFields())
-				res = await ViewModel.SaveCurrentFormAsync(false);
+            var missingView = SetAndValidateCurrentFormFields();
+            if (missingView != null)
+            {
+                await Scroll.ScrollToAsync(0, missingView.Y, true);
+                return;
+            }
 
-            if (sender == QualifyButton && SetAndValidateCurrentFormFields())
-                res = await ViewModel.SaveCurrentFormAsync(true);
+			SetLoader(true);
+
+            res = await ViewModel.SaveCurrentFormAsync(sender == QualifyButton);
 
 			SetLoader(false);
 
@@ -185,7 +229,7 @@ namespace GurruPCL
 				await DisplayAlert("Infornmation", "Form was successfully saved", "Ok");
         }
 
-        private bool SetAndValidateCurrentFormFields()
+        private View SetAndValidateCurrentFormFields()
         {
             //init
             ViewModel.CurrentForm.OrganizationName = OrganizationName.ValueText;
@@ -209,8 +253,9 @@ namespace GurruPCL
 			SalesPerson.Missing = ViewModel.CurrentForm.SalesPerson == null;
 			BusinessType.Missing = ViewModel.CurrentForm.BusinessType == null;
 
-            return (!OrganizationName.Missing || FirstName.Missing || LastName.Missing || 
-                ViewModel.CurrentForm.SalesPerson == null || ViewModel.CurrentForm.SalesActivity == null || ViewModel.CurrentForm.BusinessType == null);
+            return OrganizationName.Missing ? OrganizationName : ViewModel.CurrentForm.BusinessType == null ? BusinessType : 
+                FirstName.Missing ? FirstName : LastName.Missing ? (View)LastName : 
+                ViewModel.SalesPersons == null ? SalesPerson : ViewModel.CurrentForm.FormSource == Form.Source.None ? Source: null;
         }
 
 		void SetLoader(bool show)

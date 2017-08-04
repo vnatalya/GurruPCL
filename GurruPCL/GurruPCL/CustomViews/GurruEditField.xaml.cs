@@ -14,6 +14,8 @@ namespace GurruPCL.CustomViews
     {
         static int MaxChar = 50;
 
+        public EventHandler Completed;
+
         public string ValueText
         {
             get { return EditText.Text; }
@@ -52,6 +54,17 @@ namespace GurruPCL.CustomViews
 
             if (!string.IsNullOrEmpty(e.NewTextValue) && e.NewTextValue.Length > MaxChar)
                 (sender as Entry).Text = e.OldTextValue ?? string.Empty;
+        }
+
+        private void EditText_Completed(object sender, EventArgs e)
+        {
+            if (Completed != null)
+                Completed.Invoke(this, new EventArgs());
+        }
+
+        public void StartEditing()
+        {
+            EditText.Focus();
         }
     }
 }
